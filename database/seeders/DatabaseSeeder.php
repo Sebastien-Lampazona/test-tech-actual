@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
+use App\Models\Mission;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +15,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        //Creating administrator
+        User::factory()->administrator()->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        for ($i = 0; $i < 10; $i++) {
+            User::factory()->create();
+        }
+
+        //Creating missions without candidate
+        for ($i = 0; $i < 3; $i++) {
+            Mission::factory()->create();
+        }
+
+        // Gettings all users
+        $users = User::where('role', UserRole::CANDIDATE())->get();
+
+        //Creating missions with candidates
+        for ($i = 0; $i < 3; $i++) {
+            $mission = Mission::factory()->create();
+            $mission->candidates()->attach($users->random(3), [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
