@@ -7,8 +7,8 @@ use Rexlabs\Enum\Enum;
 /**
  * The UserRole enum.
  *
- * @method static self CANDIDATE()
- * @method static self ADMINISTRATOR()
+ * @method static self CANDIDATE
+ * @method static self ADMINISTRATOR
  */
 class UserRole extends Enum
 {

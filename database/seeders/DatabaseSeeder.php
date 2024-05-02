@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // Gettings all users
-        $users = User::where('role', UserRole::CANDIDATE())->get();
+        $users = User::where('role', UserRole::CANDIDATE)->get();
 
         //Creating missions with candidates
         for ($i = 0; $i < 3; $i++) {

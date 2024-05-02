@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Mission;
@@ -47,7 +48,11 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'birthday' => 'required|date|date_format:Y-m-d|before:18 years ago',
         ]);
-        $user = User::create($validated);
+
+        $user = User::create([
+            ...$validated,
+            'role' => UserRole::CANDIDATE,
+        ]);
         return new UserResource($user);
     }
 
@@ -69,6 +74,19 @@ class UserController extends Controller
         $user = User::find($id);
         $user->update($validated);
         return new UserResource($user);
+    }
+
+    /**
+     * Delete the user with the specified ID.
+     *
+     * @param int $id The ID of the user.
+     * @return UserResource
+     */
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return response()->json(['data' => ['message' => 'User deleted']]);
     }
 
     /**

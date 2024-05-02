@@ -30,8 +30,7 @@ class UserFactory extends Factory
             'email' => fake()->email(),
             'email_verified_at' => now(),
             'birthday' => fake()->dateTimeBetween('1990-01-01', '2012-12-31'),
-            'role' => UserRole::CANDIDATE(),
-            'password' => static::$password ??= Hash::make('password'),
+            'role' => UserRole::CANDIDATE,
         ];
     }
 
@@ -41,7 +40,7 @@ class UserFactory extends Factory
     public function administrator(): static
     {
         return $this->state(fn (array $attributes) => [
-            'role' => UserRole::ADMINISTRATOR(),
+            'role' => UserRole::ADMINISTRATOR,
         ]);
     }
 
