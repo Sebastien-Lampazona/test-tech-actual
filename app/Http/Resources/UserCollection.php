@@ -16,7 +16,13 @@ class UserCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection->transform(function ($user) {
-                return new UserResource($user);
+                return [
+                    'id' => $user->id,
+                    'firstname' => $user->firstname,
+                    'lastname' => $user->lastname,
+                    'email' => $user->email,
+                    'nb_missions' => $user->missions->count(),
+                ];
             }),
         ];
     }

@@ -16,12 +16,12 @@ class MissionCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => $this->collection->transform(function (Mission $mission) {
+            'data' => $this->collection->transform(function ($mission) {
                 return [
                     'job_title' => $mission->job_title,
                     'start_date' => $mission->start_date,
                     'end_date' => $mission->end_date,
-                    'candidates' => UserResource::collection($mission->candidates),
+                    'nb_candidates' => $mission->candidates->count(),
                 ];
             }),
         ];
