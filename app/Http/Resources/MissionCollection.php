@@ -18,12 +18,13 @@ class MissionCollection extends ResourceCollection
         return [
             'data' => $this->collection->transform(function ($mission) {
                 return [
+                    'id' => $mission->id,
                     'job_title' => $mission->job_title,
                     'start_date' => $mission->start_date,
                     'end_date' => $mission->end_date,
                     'nb_candidates' => $mission->candidates->count(),
                 ];
-            }),
+            })->toArray(),
         ];
     }
 }

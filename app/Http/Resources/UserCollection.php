@@ -23,7 +23,7 @@ class UserCollection extends ResourceCollection
                     'email' => $user->email,
                     'nb_missions' => $user->missions->count(),
                 ];
-            }),
+            })->toArray(),
         ];
     }
 }

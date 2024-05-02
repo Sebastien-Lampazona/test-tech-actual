@@ -1,0 +1,31 @@
+{
+    "extends": "@tsconfig/vite-react/tsconfig.json",
+    "compilerOptions": {
+        "types": [
+            "node"
+        ],
+        "paths": {
+            "@pages/*": [
+                "./resources/js/pages/*"
+            ],
+            "@layouts/*": [
+                "./resources/js/layouts/*"
+            ],
+            "@components/*": [
+                "./resources/js/components/*"
+            ],
+            "@hooks/*": [
+                "./resources/js/hooks/*"
+            ],
+            "@alTypes/*": [
+                "./resources/js/types/*"
+            ],
+            "@schemaValidation/*": [
+                "./resources/js/schemaValidation/*"
+            ],
+            "@commons/*": [
+                "./resources/js/commons/*"
+            ]
+        }
+    },
+}

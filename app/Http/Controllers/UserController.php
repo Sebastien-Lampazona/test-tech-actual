@@ -20,7 +20,16 @@ class UserController extends Controller
      */
     public function list()
     {
-        return new UserCollection(User::all());
+        $queryParams = request()->query();
+        $role = UserRole::CANDIDATE;
+        if (isset($queryParams['role'])) {
+            $role = $queryParams['role'];
+            if (!in_array($role, UserRole::keys())) {
+                throw new UnprocessableEntityHttpException('Invalid role');
+            }
+        }
+
+        return new UserCollection(User::all()->where('role', $role));
     }
 
     /**
@@ -85,6 +94,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        if (!$user) {
+            throw new UnprocessableEntityHttpException('User not found');
+        }
         $user->delete();
         return response()->json(['data' => ['message' => 'User deleted']]);
     }
@@ -101,6 +113,9 @@ class UserController extends Controller
         $user = User::find($userId);
         if (!$user) {
             throw new UnprocessableEntityHttpException('User not found');
+        }
+        if ($user->role !== UserRole::CANDIDATE) {
+            throw new BadRequestHttpException('Only candidates can have missions');
         }
         // Check if the mission exists
         if (!Mission::find($missionId)) {
@@ -127,6 +142,9 @@ class UserController extends Controller
         $user = User::find($userId);
         if (!$user) {
             throw new UnprocessableEntityHttpException('User not found');
+        }
+        if ($user->role !== UserRole::CANDIDATE) {
+            throw new BadRequestHttpException('Only candidates can have missions');
         }
         // Check if the mission exists
         if (!Mission::find($missionId)) {
