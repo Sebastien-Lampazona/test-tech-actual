@@ -124,11 +124,11 @@ export default function DrawerAppBar({ children }: {
         </Toolbar>
         <Divider />
         <List component="nav">
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate('/candidats')}>
             <ListItemIcon>
               <PeopleIcon />
             </ListItemIcon>
-            <ListItemText primary="Liste des candidats" onClick={() => navigate('/candidats')}/>
+            <ListItemText primary="Liste des candidats"/>
           </ListItemButton>
         </List>
         {children}

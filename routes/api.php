@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 // Missions routes
 Route::controller(MissionController::class)->prefix('/missions')->group(function () {
     Route::get('/', 'list');
+    Route::post('/', 'store');
 });
 
 // Users routes

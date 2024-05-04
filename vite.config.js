@@ -9,7 +9,7 @@ import * as path from 'path';
 export default defineConfig({
   plugins: [
     laravel({
-      input: ['resources/js/app.jsx'],
+      input: ['resources/js/app.tsx'],
       refresh: true,
     }),
     react(),
@@ -22,6 +22,10 @@ export default defineConfig({
   ],
   resolve: {
     alias: [
+      {
+        find: /@mui\/material/,
+        replacement: path.resolve(__dirname, 'node_modules', '@mui', 'material'),
+      },
       {
         find: '@pages',
         replacement: path.resolve(__dirname, 'resources/js/pages'),

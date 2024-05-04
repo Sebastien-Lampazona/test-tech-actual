@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
         $users = User::where('role', UserRole::CANDIDATE)->get();
 
         //Creating missions with candidates
-        for ($i = 0; $i < 3; $i++) {
+        $nbMissionByCandidate = 1; // Fix to 1 for quickly prevent straddles
+        for ($i = 0; $i < $nbMissionByCandidate; $i++) {
             $mission = Mission::factory()->create();
             $mission->candidates()->attach($users->random(3), [
                 'created_at' => now(),

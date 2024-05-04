@@ -3,8 +3,8 @@ export interface Candidat {
     firstname: string;
     lastname: string;
     email: string;
-    birthday?: string;
-    missions?: Mission[];
+    birthday?: string | Date;
+    missions?: Mission[] | { id: number }[];
     nb_missions?: number;
     role?: string;
 }

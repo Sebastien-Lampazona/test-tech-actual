@@ -4,9 +4,14 @@ import axiosFetch from "@commons/axiosFetch";
 import queryClient from "@commons/queryClient";
 import { enqueueSnackbar } from "notistack";
 import { AxiosError } from "axios";
+import dayjs from "dayjs";
 
 export default () => useMutation({
-    mutationFn: (candidat: Candidat) => axiosFetch.patch(`/users/${candidat.id}`, candidat).then(({ data }) => data.data as Candidat),
+    mutationFn: (candidat: Candidat) => axiosFetch.patch(`/users/${candidat.id}`, {
+        ...candidat,
+        birthday: dayjs(candidat.birthday).format('YYYY-MM-DD'),
+        missions: candidat?.missions?.map(m => m.id)
+    }).then(({ data }) => data.data as Candidat),
     // When mutate is called:
     onMutate: async (candidat) => {
         // Cancel any outgoing refetches

@@ -9,12 +9,16 @@ import { Chip } from '@mui/material';
 
 export default function SelectMission({
     selectedMissions,
+    disabledMissions,
     inputProps,
     autocompleteProps,
+    multiple,
 }: {
-    selectedMissions?: Mission[],
+    selectedMissions?: Mission[] | Mission,
+    disabledMissions?: Mission[] | Mission,
     inputProps?: TextFieldProps,
-    autocompleteProps?: Omit<AutocompleteProps<Mission, true, false, false>, 'options' | 'getOptionLabel' | 'getOptionSelected' | 'renderInput'>,
+    autocompleteProps?: { [key: string]: any },
+    multiple?: boolean,
 }) {
     const missions = useFetchAllMissions();
     const getMissionLabel = useCallback((option: Mission) => {
@@ -26,10 +30,17 @@ export default function SelectMission({
             <Autocomplete
                 {...autocompleteProps}
                 key={key}
-                multiple
+                multiple={multiple ?? true}
                 options={missions.data || []}
                 getOptionKey={(option) => option.id}
                 loading={missions.isLoading}
+                getOptionDisabled={(option) => {
+                    if (!disabledMissions) return false;
+                    if (Array.isArray(disabledMissions)) {
+                        return disabledMissions.some((mission: Mission) => mission.id === option.id);
+                    }
+                    return disabledMissions.id === option.id;
+                }}
                 getOptionLabel={getMissionLabel}
                 value={selectedMissions}
                 isOptionEqualToValue={(option, value) => option.id === value.id}

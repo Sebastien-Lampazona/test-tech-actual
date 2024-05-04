@@ -149,9 +149,26 @@ class UserTest extends TestCase
      */
     public function test_user_add_mission(): void
     {
-        $response = $this->put('/api/users/1/missions/1');
+        // Creating a mission in the future to prevent straddles
+        $response = $this->post('/api/missions', [
+            'job_title' => 'Mission test',
+            'start_date' => date('Y-m-d', strtotime('+3 day')),
+            'end_date' => date('Y-m-d', strtotime('+4 days')),
+        ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
+        $missionId = $response->json('data.id');
+
+        // Clearing all user missions before testing the add mission endpoint
+        $response = $this->patch('/api/users/3', ['missions' => []]);
+        if ($response->status() !== 200) {
+            $this->fail($response->json('message'));
+        }
+        $response = $this->put('/api/users/3/missions/' . $missionId);
+
+        if ($response->status() !== 200) {
+            $this->fail($response->json('message'));
+        }
         $response->assertJsonStructure([
             'data' => [
                 'id',
@@ -167,11 +184,11 @@ class UserTest extends TestCase
         $this->assertIsArray($data['missions']);
 
         $this->assertDatabaseHas('mission_user', [
-            'user_id' => 1,
-            'mission_id' => 1,
+            'user_id' => 3,
+            'mission_id' => $missionId,
         ]);
 
-        $this->assertContains(1, array_column($data['missions'], 'id'));
+        $this->assertContains($missionId, array_column($data['missions'], 'id'));
     }
 
     /**
@@ -180,11 +197,27 @@ class UserTest extends TestCase
     public function test_user_remove_mission(): void
     {
         // Adding a mission to the user before testing the remove mission endpoint
-        $this->put('/api/users/1/missions/1');
+        // Creating a mission in the future to prevent straddles
+        $response = $this->post('/api/missions', [
+            'job_title' => 'Mission test',
+            'start_date' => date('Y-m-d', strtotime('+5 day')),
+            'end_date' => date('Y-m-d', strtotime('+6 days')),
+        ]);
 
-        $response = $this->delete('/api/users/1/missions/1');
+        $response->assertStatus(201);
+        $missionId = $response->json('data.id');
 
-        $response->assertStatus(200);
+        // Adding a mission to the user before testing the remove mission endpoint
+        $response = $this->patch('/api/users/4', ['missions' => [$missionId]]);
+        if ($response->status() !== 200) {
+            $this->fail($response->json('message'));
+        }
+
+        $response = $this->delete('/api/users/4/missions/' . $missionId);
+        if ($response->status() !== 200) {
+            $this->fail($response->json('message'));
+        }
+
         $response->assertJsonStructure([
             'data' => [
                 'id',
@@ -200,11 +233,11 @@ class UserTest extends TestCase
         $this->assertIsArray($data['missions']);
 
         $this->assertDatabaseMissing('mission_user', [
-            'user_id' => 1,
-            'mission_id' => 1,
+            'user_id' => 4,
+            'mission_id' => $missionId,
         ]);
 
-        $this->assertNotContains(1, array_column($data['missions'], 'id'));
+        $this->assertNotContains($missionId, array_column($data['missions'], 'id'));
     }
 
     /**
@@ -212,9 +245,9 @@ class UserTest extends TestCase
      */
     public function test_user_delete(): void
     {
-        $response = $this->delete('/api/users/1');
+        $response = $this->delete('/api/users/2');
 
         $response->assertStatus(200);
-        $this->assertDatabaseMissing('users', ['id' => 1]);
+        $this->assertDatabaseMissing('users', ['id' => 2]);
     }
 }

@@ -1,6 +1,4 @@
 import { MouseEvent, useCallback, useMemo } from 'react';
-import axiosFetch from '@commons/axiosFetch';
-import { useQuery } from '@tanstack/react-query';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
