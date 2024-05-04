@@ -1,7 +1,8 @@
 <p align="center"><img src="https://www.groupeactual.eu/img/front/logo-actual-agencemploi.png" width="400" alt="Laravel Logo"></p>
 
 <p align="center">
-<a href="https://github.com/Sebastien-Lampazona/test-tech-actual/workflows/tests/badge.svg/actions"><img src="https://github.com/Sebastien-Lampazona/test-tech-actual/workflows/tests/badge.svg/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://github.com/Sebastien-Lampazona/test-tech-actual/actions/workflows/laravel-tests.yml/badge.svg"><img src="https://github.com/Sebastien-Lampazona/test-tech-actual/actions/workflows/laravel-tests.yml/badge.svg" alt="Build Status"></a>
+<a href="https://github.com/Sebastien-Lampazona/test-tech-actual/actions/workflows/react-tests.yml/badge.svg"><img src="https://github.com/Sebastien-Lampazona/test-tech-actual/actions/workflows/react-tests.yml/badge.svg" alt="Build Status"></a>
 </p>
 
 ![image](https://github.com/Sebastien-Lampazona/test-tech-actual/assets/2599774/b9d2e1c9-bace-4de2-a789-4a795bd5a64b)
