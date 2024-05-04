@@ -8,9 +8,9 @@
 
 ## Informations techniques
 
-Lien du diagramme de base de données : https://dbdiagram.io/d/Test-Tech-Actual-663213bb5b24a634d03d4e11
+Lien du diagramme intéractif de base de données : https://dbdiagram.io/d/Test-Tech-Actual-663213bb5b24a634d03d4e11
 
-<iframe width="560" height="315" src='https://dbdiagram.io/e/663213bb5b24a634d03d4e11/663215ab5b24a634d03d6ca2'> </iframe>
+![image](https://github.com/Sebastien-Lampazona/test-tech-actual/assets/2599774/d98911ec-b145-4e8b-94d9-41e7d4bd24f4)
 
 ## Utilisation du projet
 
