@@ -45,3 +45,13 @@ Pour éxecuter les tests back il faut faire la commande suivante :
 php artisan test
 ```
 Ils tournent en général autour des 2 secondes.
+
+## Execution de la commande permettant de lister les candidats en fin de mission
+
+La commande possède un argument de date optionnel. Il représente la date de fin de mission, si il n'est pas fournis, on prend la date du jour.
+
+```sh
+php artisan app:candidats-end-assigment {date?}
+````
+
+![image](https://github.com/Sebastien-Lampazona/test-tech-actual/assets/2599774/0a9efa1f-bc78-426f-bd35-2d403dafdbb1)

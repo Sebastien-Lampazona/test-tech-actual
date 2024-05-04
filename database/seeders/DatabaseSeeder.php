@@ -39,5 +39,10 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
+
+        //Creating missions without candidate
+        for ($i = 0; $i < 3; $i++) {
+            Mission::factory()->inFuture()->create();
+        }
     }
 }
