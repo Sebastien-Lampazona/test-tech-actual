@@ -38,6 +38,18 @@ Le front étant compilé, il devrait directement s'afficher.
 
 Normalement tout sera opérationnel directement sur l'URL http://localhost:8000
 
+## Execution de la commande permettant de lister les candidats en fin de mission
+
+La commande possède un argument de date optionnel. Il représente la date de fin de mission, si il n'est pas fournis, on prend la date du jour.
+
+![image](https://github.com/Sebastien-Lampazona/test-tech-actual/assets/2599774/4795d845-4d1c-48b3-be4f-fa82885e2fe0)
+
+```sh
+php artisan app:candidats-end-assigment {date?}
+```
+![image](https://github.com/Sebastien-Lampazona/test-tech-actual/assets/2599774/92e13f0a-85bc-4adf-a2a9-98c33553c200)
+
+
 ## Lancement des tests Back
 
 Les tests back utilisent leurs propre base de donnée SQLite afin de pouvoir faire des tests fonctionnels sur un jeu de données "seedés".
@@ -51,16 +63,17 @@ php artisan test
 
 Ils tournent en général autour des 2 secondes.
 
-## Execution de la commande permettant de lister les candidats en fin de mission
+## Lancement des tests front
 
-La commande possède un argument de date optionnel. Il représente la date de fin de mission, si il n'est pas fournis, on prend la date du jour.
+J'ai fait quelques tests sur le listing des candidats. Celà dit je n'ai pas testé toute l'app
 
-![image](https://github.com/Sebastien-Lampazona/test-tech-actual/assets/2599774/4795d845-4d1c-48b3-be4f-fa82885e2fe0)
-
+Pour éxecuter les tests front il faut faire la commande suivante :
 ```sh
-php artisan app:candidats-end-assigment {date?}
-````
-![image](https://github.com/Sebastien-Lampazona/test-tech-actual/assets/2599774/92e13f0a-85bc-4adf-a2a9-98c33553c200)
+npm run test
+```
+
+![image](https://github.com/Sebastien-Lampazona/test-tech-actual/assets/2599774/a2212398-76aa-4ef2-b5f9-6da35741e9ab)
+
 
 ## Remarques
 

@@ -1,8 +1,11 @@
 {
     "extends": "@tsconfig/vite-react/tsconfig.json",
+    "esModuleInterop": true,
     "compilerOptions": {
         "types": [
-            "node"
+            "node",
+            "vitest/globals",
+            "react"
         ],
         "paths": {
             "@pages/*": [
@@ -25,7 +28,10 @@
             ],
             "@commons/*": [
                 "./resources/js/commons/*"
+            ],
+            "@mocks/*": [
+                "./resources/js/__mocks__/*"
             ]
         }
-    },
+    }
 }
